@@ -56,10 +56,7 @@ public final class Ranking {
 
     	// Step 2: Calculate the TF-IDF of the words.
     	Map<String, Integer>tfOfWords = countsOfWords
-    	.map(keyAndCount -> {
-    		String key = keyAndCount._1();
-    		return new Tuple2<>(key.split(), 1);
-    	})
+    	.map(keyAndCount -> new Tuple2<>(keyAndCount._1() 1))
     	.countByKey();
 
     	//countsOfWords.reduceByKey
