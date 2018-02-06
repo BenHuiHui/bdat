@@ -14,7 +14,7 @@ import java.util.Collection;
 public final class Ranking {
 	private  String filePath = "AssignmentData/datafiles";
 	private  String stopWordFilePath = "AssignmentData/stopwords.txt";
-	private  Char[] specialCharacters = [',', '.', '!', '[', ']'];
+	private  Char[] specialCharacters = {',', '.', '!', '[', ']'};
 
 	public static void main(String[] args) throws Exception {
 		List<String> stopwords = stopwordsAtFilePath(stopWordFilePath);
