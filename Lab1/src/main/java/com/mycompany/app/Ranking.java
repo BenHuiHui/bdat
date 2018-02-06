@@ -17,7 +17,9 @@ public final class Ranking {
 	private static Character[] specialCharacters = {',', '.', '!', '[', ']'};
 
 	public static void main(String[] args) throws Exception {
-		List<String> stopwords = stopwordsAtFilePath(stopWordFilePath);
+		Ranking ranking = new Ranking();
+
+		List<String> stopwords = ranking.stopwordsAtFilePath(stopWordFilePath);
 
 		//create Spark context with Spark configuration
         JavaSparkContext sc = new JavaSparkContext(new SparkConf().setAppName("lab1")); 
@@ -26,12 +28,12 @@ public final class Ranking {
 
         // Step 1: Count frequency of each word.
         JavaPairRDD<String, Integer> counts = files
-        .flatMap((filename, content) -> {
-        	String[] words = content.split(" ");
+        .flatMap((String filename, String content) -> {
+        	String[] words = content.split("\\W+");
         	List<String> words = new ArrayList<String>();
 
         	for (String word : words) {
-        		newWord = removeSpecialCharacters(word, specialCharacters);
+        		String newWord = ranking.removeSpecialCharacters(word, specialCharacters);
         		words.add(filename+"@"+newWord.toLowercase());
         	}
         	return words.iterator();
@@ -45,7 +47,7 @@ public final class Ranking {
         //stop spark
 	}
 
-	private String removeSpecialCharacters(String word, Char[] specialCharacters) {
+	private String removeSpecialCharacters(String word, Character[] specialCharacters) {
 		while(specialCharacters.contains(word.charAt(word.length()) -1)) {
 			word = word.substring(0, word.length()-1);
 		}
