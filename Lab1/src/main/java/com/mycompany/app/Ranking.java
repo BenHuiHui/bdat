@@ -40,12 +40,16 @@ public final class Ranking {
         	List<String> newWords = new ArrayList<String>();
 
         	for (String word : words) {
+        		if (word.length() == 0) {
+        			continue;
+        		}
+        		
         		String newWord = word.toLowerCase();
         		newWords.add(filename+"@"+newWord);
         	}
         	return newWords.iterator();
         })
-        //.filter(word -> stopwords.contains(word.split("@")[1]))
+        .filter(word -> stopwords.contains(word.split("@")[1]))
         .mapToPair(word -> new Tuple2<>(word, 1))
     	.reduceByKey((a, b) -> a + b);
 
