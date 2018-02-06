@@ -9,9 +9,10 @@ import org.apache.spark.SparkConf;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashSet;
 import java.util.Collection;
 import java.util.Scanner;
-import java .util.*;
+import java.io.File;
 
 public final class Ranking {
 	private static String filePath = "AssignmentData/datafiles";
@@ -57,8 +58,8 @@ public final class Ranking {
 		return word;
 	}
 
-	private List<String> stopwordsAtFilePath(String filePath) {
-		ArrayList<String>stopwords = new ArrayList<String>();
+	private Set<String> stopwordsAtFilePath(String filePath) {
+		Set<String>stopwords = new HashSet<String>();
 		Scanner scanner = new Scanner(new File(filePath));
 		while (scanner.hasNextLine()) {
 			stopwords.add(scanner.nextLine());
