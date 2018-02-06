@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
-public class Lab1 {
-	public static void main(String[] args) {
-		private static String filePath = "AssignmentData/datafiles";
-		private static String stopWordFilePath = "AssignmentData/stopwords.txt";
-		private static Char[] specialCharacters = [',', '.', '!', '[', ']'];
+public final class Lab1 {
+	public static void main(String[] args) throws Exception {
+		private  String filePath = "AssignmentData/datafiles";
+		private  String stopWordFilePath = "AssignmentData/stopwords.txt";
+		private  Char[] specialCharacters = [',', '.', '!', '[', ']'];
 
 		List<String> stopwords = stopwordsAtFilePath(stopWordFilePath);
 
