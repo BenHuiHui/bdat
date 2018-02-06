@@ -32,7 +32,10 @@ public final class Ranking {
 
         // Step 1: Count frequency of each word.
         JavaPairRDD<String, Integer> counts = files
-        .flatMap((filename, content) -> {
+        .flatMap(filenameAndcontent -> {
+        	String filename = filenameAndcontent._1();
+        	String content = filenameAndcontent._2();
+        	
         	String[] words = content.split("\\W+");
         	List<String> newWords = new ArrayList<String>();
 
