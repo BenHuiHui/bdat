@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Collection;
 
 public final class Ranking {
-	private  String filePath = "AssignmentData/datafiles";
-	private  String stopWordFilePath = "AssignmentData/stopwords.txt";
-	private  Char[] specialCharacters = {',', '.', '!', '[', ']'};
+	private static String filePath = "AssignmentData/datafiles";
+	private static String stopWordFilePath = "AssignmentData/stopwords.txt";
+	private static Character[] specialCharacters = {',', '.', '!', '[', ']'};
 
 	public static void main(String[] args) throws Exception {
 		List<String> stopwords = stopwordsAtFilePath(stopWordFilePath);
@@ -25,7 +25,7 @@ public final class Ranking {
         JavaRDD<String> files = sc.wholeTextFiles(filePath);
 
         // Step 1: Count frequency of each word.
-        JavaPairRDD<String, Integer> counts = file
+        JavaPairRDD<String, Integer> counts = files
         .flatMap((filename, content) -> {
         	String[] words = content.split(" ");
         	List<String> words = new ArrayList<String>();
