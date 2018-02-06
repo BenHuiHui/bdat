@@ -3,7 +3,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mycompany.app</groupId>
-	<artifactId>lab1</artifactId>
+	<artifactId>ranking</artifactId>
 	<version>1.0</version>
 
 	<dependencies>

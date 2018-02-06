@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
-public final class Lab1 {
+public final class Ranking {
 	public static void main(String[] args) throws Exception {
 		private  String filePath = "AssignmentData/datafiles";
 		private  String stopWordFilePath = "AssignmentData/stopwords.txt";
