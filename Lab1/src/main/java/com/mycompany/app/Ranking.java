@@ -31,7 +31,7 @@ public final class Ranking {
         JavaPairRDD<String, String> files = sc.wholeTextFiles(filePath);
 
         // Step 1: Count frequency of each word.
-        JavaPairRDD<String, Integer> counts = files
+        JavaPairRDD<String, Integer> countsOfWords = files
         .flatMap(filenameAndcontent -> {
         	String filename = filenameAndcontent._1();
         	String content = filenameAndcontent._2();
@@ -43,7 +43,7 @@ public final class Ranking {
         		if (word.length() == 0) {
         			continue;
         		}
-        		
+
         		String newWord = word.toLowerCase();
         		newWords.add(filename+"@"+newWord);
         	}
@@ -52,6 +52,17 @@ public final class Ranking {
         .filter(word -> stopwords.contains(word.split("@")[1]))
         .mapToPair(word -> new Tuple2<>(word, 1))
     	.reduceByKey((a, b) -> a + b);
+
+    	// Step 2: Calculate the TF-IDF of the words.
+    	Map<String, Integer>tfOfWords = countsOfWords
+    	.map(keyAndCount -> {
+    		String key = keyAndCount._1();
+    		return new Tuple2<>(key.split(), 1)
+    	})
+    	.countByKey();
+
+    	System.out.println(tfOfWords);
+
 
         //set the output folder
         counts.saveAsTextFile("outfile");
