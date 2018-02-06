@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
+import java.util.Scanner;
 
 public final class Ranking {
 	private static String filePath = "AssignmentData/datafiles";
