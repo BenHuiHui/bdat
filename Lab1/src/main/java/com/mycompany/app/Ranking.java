@@ -19,6 +19,7 @@ public final class Ranking {
 	private static String filePath = "AssignmentData/datafiles";
 	private static String stopWordFilePath = "AssignmentData/stopwords.txt";
 	private static Character[] specialCharacters = {',', '.', '!', '[', ']'};
+	private int numberOfDoc = 10;
 
 	public static void main(String[] args) throws Exception {
 		Ranking ranking = new Ranking();
@@ -57,9 +58,11 @@ public final class Ranking {
     	Map<String, Integer>tfOfWords = countsOfWords
     	.map(keyAndCount -> {
     		String key = keyAndCount._1();
-    		return new Tuple2<>(key.split(), 1)
+    		return new Tuple2<>(key.split(), 1);
     	})
     	.countByKey();
+
+    	//countsOfWords.reduceByKey
 
     	System.out.println(tfOfWords);
 
