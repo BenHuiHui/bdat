@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 import java.util.Scanner;
+import java .util.*;
 
 public final class Ranking {
 	private static String filePath = "AssignmentData/datafiles";
@@ -31,13 +32,13 @@ public final class Ranking {
         JavaPairRDD<String, Integer> counts = files
         .flatMap((content, filename) -> {
         	String[] words = content.split("\\W+");
-        	List<String> words = new ArrayList<String>();
+        	List<String> newWords = new ArrayList<String>();
 
         	for (String word : words) {
         		String newWord = ranking.removeSpecialCharacters(word, specialCharacters);
-        		words.add(filename+"@"+newWord.toLowercase());
+        		newWords.add(filename+"@"+newWord.toLowerCase());
         	}
-        	return words.iterator();
+        	return newWords.iterator();
         })
         .filter(word -> stopwords.contains(word.split("@")[1]))
         .mapToPair(word -> new Tuple2<>(word, 1))
