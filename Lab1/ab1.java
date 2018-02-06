@@ -32,7 +32,7 @@ public class Lab1 {
 
         	for (String word : words) {
         		newWord = removeSpecialCharacters(word, specialCharacters);
-        		words.add(filename+"@"+newWord);
+        		words.add(filename+"@"+newWord.toLowercase());
         	}
         	return words.iterator();
         })
