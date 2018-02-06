@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.Collection;
 import java.util.Scanner;
 import java.io.File;
@@ -22,7 +23,7 @@ public final class Ranking {
 	public static void main(String[] args) throws Exception {
 		Ranking ranking = new Ranking();
 
-		List<String> stopwords = ranking.stopwordsAtFilePath(stopWordFilePath);
+		Set<String> stopwords = ranking.stopwordsAtFilePath(stopWordFilePath);
 
 		//create Spark context with Spark configuration
         JavaSparkContext sc = new JavaSparkContext(new SparkConf().setAppName("lab1")); 
@@ -31,7 +32,7 @@ public final class Ranking {
 
         // Step 1: Count frequency of each word.
         JavaPairRDD<String, Integer> counts = files
-        .flatMap((content, filename) -> {
+        .mapap((filename, content) -> {
         	String[] words = content.split("\\W+");
         	List<String> newWords = new ArrayList<String>();
 
