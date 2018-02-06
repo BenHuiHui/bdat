@@ -28,7 +28,7 @@ public final class Ranking {
 		//create Spark context with Spark configuration
         JavaSparkContext sc = new JavaSparkContext(new SparkConf().setAppName("ranking")); 
 
-        JavaRDD<String, String> files = sc.wholeTextFiles(filePath);
+        JavaPairRDD<String, String> files = sc.wholeTextFiles(filePath);
 
         // Step 1: Count frequency of each word.
         JavaPairRDD<String, Integer> counts = files
