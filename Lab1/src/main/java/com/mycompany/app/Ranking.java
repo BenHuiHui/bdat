@@ -35,7 +35,7 @@ public final class Ranking {
         .flatMap(filenameAndcontent -> {
         	String filename = filenameAndcontent._1();
         	String content = filenameAndcontent._2();
-        	
+
         	String[] words = content.split("\\W+");
         	List<String> newWords = new ArrayList<String>();
 
@@ -63,7 +63,7 @@ public final class Ranking {
 		return word;
 	}
 */
-	private Set<String> stopwordsAtFilePath(String filePath) {
+	private Set<String> stopwordsAtFilePath(String filePath) throws Exception{
 		Set<String>stopwords = new HashSet<String>();
 		Scanner scanner = new Scanner(new File(filePath));
 		while (scanner.hasNextLine()) {
