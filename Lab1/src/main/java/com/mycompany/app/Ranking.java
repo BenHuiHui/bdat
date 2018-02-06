@@ -37,8 +37,8 @@ public final class Ranking {
         	List<String> newWords = new ArrayList<String>();
 
         	for (String word : words) {
-        		String newWord = ranking.removeSpecialCharacters(word, specialCharacters);
-        		newWords.add(filename+"@"+newWord.toLowerCase());
+        		String newWord = word.toLowerCase();
+        		newWords.add(filename+"@"+newWord);
         	}
         	return newWords.iterator();
         })
@@ -51,6 +51,7 @@ public final class Ranking {
         //stop spark
 	}
 
+/*
 	private String removeSpecialCharacters(String word, Character[] specialCharacters) {
 		while(specialCharacters.contains(word.charAt(word.length()) -1)) {
 			word = word.substring(0, word.length()-1);
@@ -58,7 +59,7 @@ public final class Ranking {
 
 		return word;
 	}
-
+*/
 	private Set<String> stopwordsAtFilePath(String filePath) {
 		Set<String>stopwords = new HashSet<String>();
 		Scanner scanner = new Scanner(new File(filePath));
