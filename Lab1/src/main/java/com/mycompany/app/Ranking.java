@@ -66,7 +66,7 @@ public final class Ranking {
 
 
         //set the output folder
-        counts.saveAsTextFile("outfile");
+        countsOfWords.saveAsTextFile("outfile");
         //stop spark
 	}
 
