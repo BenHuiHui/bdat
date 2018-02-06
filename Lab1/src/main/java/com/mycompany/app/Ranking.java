@@ -56,7 +56,7 @@ public final class Ranking {
     	.reduceByKey((a, b) -> a + b);
 
     	// Step 2: Calculate the TF-IDF of the words.
-    	Map<String, Integer>tfOfWords = countsOfWords
+    	Map<String, Long>tfOfWords = countsOfWords
     	.mapToPair(keyAndCount -> new Tuple2<>(keyAndCount._1().split("@")[1], 1))
     	.countByKey();
 
