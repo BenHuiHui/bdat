@@ -96,7 +96,7 @@ public final class Ranking {
 
     	// Step 4: Calculate the final value.
     	Set<String> queryWords = ranking.readQueryWords();
-
+/*
     	JavaPairRDD<String, Double> docRanking = normalizedTfIdf
     	.mapToPair(keyAndCount -> {
     		String key = keyAndCount._1();
@@ -112,7 +112,7 @@ public final class Ranking {
     		}
     	})
     	.reduceByKey((a, b) -> a+b);
-
+*/
     	// Step 5: Rank the doc.
 
         //set the output folder
