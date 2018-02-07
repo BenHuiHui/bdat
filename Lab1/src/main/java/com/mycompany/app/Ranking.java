@@ -68,7 +68,7 @@ public final class Ranking {
 
     		Double tfidf = (1 + Math.log(count)) * Math.log(numberOfDoc / tfOfWords.get(word));
     		return new Tuple2<>(key, tfidf);
-    	})
+    	});
 
         //set the output folder
         tfIdfOfWords.saveAsTextFile("outfile");
