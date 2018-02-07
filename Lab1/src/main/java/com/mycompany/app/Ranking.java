@@ -71,7 +71,7 @@ public final class Ranking {
     	});
 
     	// Step 3: Normalize the tf-idf.
-    	JavaPairRDD<String, Double> sumOfTfIdf = tfIdfOfWords
+    	Map<String, Double> sumOfTfIdf = tfIdfOfWords
     	.mapToPair(keyAndCount -> {
     		String key = keyAndCount._1();
     		String doc = key.split("@")[0];
@@ -79,7 +79,10 @@ public final class Ranking {
 
     		return new Tuple2<>(doc, tfidf * tfidf);
     	})
-    	.reduceByKey((a, b) -> a+b);
+    	.reduceByKey((a, b) -> a+b)
+    	.collectAsMap();
+
+    	System.out.println(sumOfTfIdf);
 
     	JavaPairRDD<String, Double> normalizedTfIdf = tfIdfOfWords
     	.mapToPair(keyAndCount -> {
@@ -87,8 +90,14 @@ public final class Ranking {
     		String doc = key.split("@")[0];
 
     		Double tfidf = keyAndCount._2();
-    		return new Tuple2<>(key, tfidf / Math.sqrt(sumOfTfIdf.lookup(doc).get(0)));
+    		return new Tuple2<>(key, tfidf / Math.sqrt(sumOfTfIdf.get(doc)));
     	});
+
+
+    	// Step 4: Calculate the final value.
+
+
+    	// Step 5: Rank the doc.
 
         //set the output folder
         normalizedTfIdf.saveAsTextFile("outfile");
