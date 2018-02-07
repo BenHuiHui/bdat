@@ -121,7 +121,7 @@ public final class Ranking {
  		.sortByKey(false);
 
  		List<Tuple2<Double, String>> top3 = sortedDocRanking.take(3);
-    	writeOutput(top3);
+    	ranking.writeOutput(top3);
 
         //set the output folder
         // countsOfWords.saveAsTextFile("countsOfWords");
