@@ -87,8 +87,6 @@ public final class Ranking {
     	.reduceByKey((a, b) -> a+b)
     	.collectAsMap();
 
-    	System.out.println(sumOfTfIdf);
-
     	JavaPairRDD<String, Double> normalizedTfIdf = tfIdfOfWords
     	.mapToPair(keyAndCount -> {
     		String key = keyAndCount._1();
@@ -101,7 +99,6 @@ public final class Ranking {
 
     	// Step 4: Calculate the final value.
     	Set<String> queryWords = ranking.readQueryWords();
-    	System.out.println("\n\n\n\n\n"+queryWords);
 
     	JavaPairRDD<String, Double> docRanking = normalizedTfIdf
     	.mapToPair(keyAndCount -> {
@@ -113,14 +110,15 @@ public final class Ranking {
     		Double zero = Double.valueOf(0.0);
 
     		if (queryWords.contains(word)) {
-    			return new Tuple2<>(word, tfidf);
+    			return new Tuple2<>(doc, tfidf);
     		} else {
-    			return new Tuple2<>(word, zero);
+    			return new Tuple2<>(doc, zero);
     		}
     	})
     	.reduceByKey((a, b) -> a+b);
     	
     	// Step 5: Rank the doc.
+
 
         //set the output folder
         countsOfWords.saveAsTextFile("countsOfWords");
