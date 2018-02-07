@@ -87,7 +87,7 @@ public final class Ranking {
     		String doc = key.split("@")[0];
 
     		Double tfidf = keyAndCount._2();
-    		return new Tuple2<>(key, tfidf / Math.sqrt(sumOfTfIdf.lookUp(doc)[0]));
+    		return new Tuple2<>(key, tfidf / Math.sqrt(sumOfTfIdf.lookup(doc)[0]));
     	});
 
         //set the output folder
