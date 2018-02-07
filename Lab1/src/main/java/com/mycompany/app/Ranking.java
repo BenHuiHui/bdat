@@ -108,13 +108,13 @@ public final class Ranking {
     		Double zero = Double.valueOf(0.0);
 
     		if (queryWords.contains(word)) {
-    			return new Tuple2<>(doc, tfidf);
+    			return new Tuple2<>(key, tfidf);
     		} else {
-    			return new Tuple2<>(doc, zero);
+    			return new Tuple2<>(key, zero);
     		}
     	})
-    	.reduceByKey((a, b) -> a+b);
-
+    	//.reduceByKey((a, b) -> a+b);
+    	;
     	// Step 5: Rank the doc.
 
         //set the output folder
