@@ -20,7 +20,7 @@ public final class Ranking {
 	private static String filePath = "AssignmentData/datafiles";
 	private static String stopWordFilePath = "AssignmentData/stopwords.txt";
 	private static Character[] specialCharacters = {',', '.', '!', '[', ']'};
-	private double numberOfDoc = 10;
+	private static double numberOfDoc = 10;
 
 	public static void main(String[] args) throws Exception {
 		Ranking ranking = new Ranking();
