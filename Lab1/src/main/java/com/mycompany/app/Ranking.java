@@ -115,7 +115,7 @@ public final class Ranking {
 	}
 
 	private List<String> filterWords() throws Exception{
-		Set<String>stopwords = new ArrayList<String>();
+		List<String>stopwords = new ArrayList<String>();
 		Scanner scanner = new Scanner(new File("AssignmentData/query.txt"));
 		while (scanner.hasNextLine()) {
 			stopwords.add(scanner.nextLine());
