@@ -118,7 +118,8 @@ public final class Ranking {
     	.reduceByKey((a, b) -> a+b);
     	
     	// Step 5: Rank the doc.
-
+    	List<string> top3 = docRanking.top(3);
+    	System.out.println("\n"+top3+"\n");
 
         //set the output folder
         countsOfWords.saveAsTextFile("countsOfWords");
