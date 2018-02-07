@@ -118,8 +118,11 @@ public final class Ranking {
     	.reduceByKey((a, b) -> a+b);
     	
     	// Step 5: Rank the doc.
- 
-    	System.out.println("\n"+docRanking.top(3)+"\n");
+ 		docRanking = docRanking
+ 		.mapToPair(keyAndCount -> new Tuple2<>(keyAndCount._2(), keyAndCount._1()))
+ 		.sortByKey();
+
+    	// System.out.println("\n"+docRanking.top(3)+"\n");
 
         //set the output folder
         countsOfWords.saveAsTextFile("countsOfWords");
