@@ -96,7 +96,7 @@ public final class Ranking {
 
     	// Step 4: Calculate the final value.
     	Set<String> queryWords = ranking.readQueryWords();
-    	System.out.println(queryWords);
+    	System.out.println("\n\n\n\n\n"+queryWords);
 
     	JavaPairRDD<String, Double> docRanking = normalizedTfIdf
     	.mapToPair(keyAndCount -> {
@@ -118,6 +118,7 @@ public final class Ranking {
     	// Step 5: Rank the doc.
 
         //set the output folder
+        countsOfWords.saveAsTextFile("countsOfWords");
         normalizedTfIdf.saveAsTextFile("normalizedTfIdf");
         docRanking.saveAsTextFile("outfile");
         //stop spark
