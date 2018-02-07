@@ -116,7 +116,7 @@ public final class Ranking {
     	// Step 5: Rank the doc.
 
         //set the output folder
-        docRanking.saveAsTextFile("outfile");
+        normalizedTfIdf.saveAsTextFile("outfile");
         //stop spark
 	}
 
