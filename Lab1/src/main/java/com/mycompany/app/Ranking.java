@@ -120,7 +120,8 @@ public final class Ranking {
     	// Step 5: Rank the doc.
     	List<Tuple2<String, Double>> top3 = docRanking
     	.sortByKey(false)
-    	.take(3);
+    	//.take(3);
+    	;
     	System.out.println("\n"+top3+"\n");
 
         //set the output folder
