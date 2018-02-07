@@ -118,7 +118,7 @@ public final class Ranking {
     	.reduceByKey((a, b) -> a+b);
     	
     	// Step 5: Rank the doc.
- 		docRanking = docRanking
+ 		JavaPairRDD<Double, String> sortedDocRanking = docRanking
  		.mapToPair(keyAndCount -> new Tuple2<>(keyAndCount._2(), keyAndCount._1()))
  		.sortByKey();
 
@@ -127,7 +127,7 @@ public final class Ranking {
         //set the output folder
         countsOfWords.saveAsTextFile("countsOfWords");
         normalizedTfIdf.saveAsTextFile("normalizedTfIdf");
-        docRanking.saveAsTextFile("outfile");
+        sortedDocRanking.saveAsTextFile("outfile");
         //stop spark
 	}
 
