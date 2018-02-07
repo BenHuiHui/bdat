@@ -64,7 +64,7 @@ public final class Ranking {
     	.mapToPair(keyAndCount -> {
     		String key = keyAndCount._1();
     		String word = key.split("@")[1];
-    		Long count = keyAndCount._2();
+    		Integer count = keyAndCount._2();
 
     		Double tfidf = (1 + Math.log(count)) * Math.log(numberOfDoc / tfOfWords.get(word));
     		return new Tuple2<>(key, tfidf);
