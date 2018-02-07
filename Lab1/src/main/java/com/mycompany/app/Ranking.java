@@ -95,12 +95,28 @@ public final class Ranking {
 
 
     	// Step 4: Calculate the final value.
+    	Set<String> queryWords = ranking.readQueryWords();
 
+    	JavaPairRDD<String, Double> docRanking = normalizedTfIdf
+    	.mapToPair(keyAndCount -> {
+    		String key = keyAndCount._1();
+    		String doc = key.split("@")[0];
+    		String word = key.split("@")[1];
+
+    		Double tfidf = keyAndCount._2();
+
+    		if (queryWords.contains(word)) {
+    			return new Tuple2<>(doc, tfidf);
+    		} else {
+    			return new Tuple2<>(doc, 0);
+    		}
+    	})
+    	.reduceByKey((a, b) -> a+b);
 
     	// Step 5: Rank the doc.
 
         //set the output folder
-        normalizedTfIdf.saveAsTextFile("outfile");
+        docRanking.saveAsTextFile("outfile");
         //stop spark
 	}
 
@@ -113,6 +129,7 @@ public final class Ranking {
 		return word;
 	}
 */
+
 	private Set<String> stopwordsAtFilePath(String filePath) throws Exception{
 		Set<String>stopwords = new HashSet<String>();
 		Scanner scanner = new Scanner(new File(filePath));
@@ -123,13 +140,13 @@ public final class Ranking {
 		return stopwords;
 	}
 
-	private List<String> filterWords() throws Exception{
-		List<String>stopwords = new ArrayList<String>();
+	private Set<String> readQueryWords() throws Exception{
+		Set<String>querywords = new HashSet<String>();
 		Scanner scanner = new Scanner(new File("AssignmentData/query.txt"));
 		while (scanner.hasNextLine()) {
-			stopwords.add(scanner.nextLine());
+			querywords.add(scanner.nextLine());
 		}
 		scanner.close();
-		return stopwords;
+		return querywords;
 	}
 }
