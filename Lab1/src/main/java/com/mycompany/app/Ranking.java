@@ -96,7 +96,7 @@ public final class Ranking {
 
     	// Step 4: Calculate the final value.
     	Set<String> queryWords = ranking.readQueryWords();
-/*
+
     	JavaPairRDD<String, Double> docRanking = normalizedTfIdf
     	.mapToPair(keyAndCount -> {
     		String key = keyAndCount._1();
@@ -108,15 +108,15 @@ public final class Ranking {
     		if (queryWords.contains(word)) {
     			return new Tuple2<>(doc, tfidf);
     		} else {
-    			return new Tuple2<>(doc, 0);
+    			return new Tuple2<>(doc, 0.0);
     		}
     	})
     	.reduceByKey((a, b) -> a+b);
-*/
+
     	// Step 5: Rank the doc.
 
         //set the output folder
-        normalizedTfIdf.saveAsTextFile("outfile");
+        docRanking.saveAsTextFile("outfile");
         //stop spark
 	}
 
