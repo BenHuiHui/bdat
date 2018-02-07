@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Scanner;
 import java.io.File;
 import java.io.Writer;
+import java.io.FileWriter;
 
 
 public final class Ranking {
@@ -123,9 +124,9 @@ public final class Ranking {
     	writeOutput(top3);
 
         //set the output folder
-        //countsOfWords.saveAsTextFile("countsOfWords");
-        //normalizedTfIdf.saveAsTextFile("normalizedTfIdf");
-        sortedDocRanking.saveAsTextFile("outfile");
+        // countsOfWords.saveAsTextFile("countsOfWords");
+        // normalizedTfIdf.saveAsTextFile("normalizedTfIdf");
+        // sortedDocRanking.saveAsTextFile("outfile");
         //stop spark
 	}
 
