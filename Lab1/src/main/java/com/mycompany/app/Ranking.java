@@ -96,6 +96,7 @@ public final class Ranking {
 
     	// Step 4: Calculate the final value.
     	Set<String> queryWords = ranking.readQueryWords();
+    	System.out.println(queryWords);
 
     	JavaPairRDD<String, Double> docRanking = normalizedTfIdf
     	.mapToPair(keyAndCount -> {
@@ -117,6 +118,7 @@ public final class Ranking {
     	// Step 5: Rank the doc.
 
         //set the output folder
+        normalizedTfIdf.saveAsTextFile("normalizedTfIdf");
         docRanking.saveAsTextFile("outfile");
         //stop spark
 	}
@@ -142,12 +144,12 @@ public final class Ranking {
 	}
 
 	private Set<String> readQueryWords() throws Exception{
-		Set<String>querywords = new HashSet<String>();
+		Set<String>queryWords = new HashSet<String>();
 		Scanner scanner = new Scanner(new File("AssignmentData/query.txt"));
 		while (scanner.hasNextLine()) {
-			querywords.add(scanner.nextLine());
+			queryWords.add(scanner.nextLine());
 		}
 		scanner.close();
-		return querywords;
+		return queryWords;
 	}
 }
