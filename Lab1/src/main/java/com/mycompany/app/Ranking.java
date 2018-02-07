@@ -81,8 +81,17 @@ public final class Ranking {
     	})
     	.reduceByKey((a, b) -> a+b);
 
+    	JavaPairRDD<String, Double> normalizedTfIdf = tfIdfOfWords
+    	.mapToPair(keyAndCount -> {
+    		String key = keyAndCount._1();
+    		String doc = key.split("@")[0];
+
+    		Double tfidf = keyAndCount._2();
+    		return new Tuple2<>(key, tfidf / Math.sqrt(sumOfTfIdf.lookUp(doc)[0]));
+    	});
+
         //set the output folder
-        sumOfTfIdf.saveAsTextFile("outfile");
+        normalizedTfIdf.saveAsTextFile("outfile");
         //stop spark
 	}
 
