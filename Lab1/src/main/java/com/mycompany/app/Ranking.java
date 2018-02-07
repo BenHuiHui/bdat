@@ -16,6 +16,11 @@ import java.util.Collection;
 import java.util.Scanner;
 import java.io.File;
 
+
+/*
+/home/experimentben/lab1/bdat/Lab1/outfile/part-00000
+*/
+
 public final class Ranking {
 	private static String filePath = "AssignmentData/datafiles";
 	private static String stopWordFilePath = "AssignmentData/stopwords.txt";
@@ -113,8 +118,8 @@ public final class Ranking {
     			return new Tuple2<>(key, zero);
     		}
     	})
-    	//.reduceByKey((a, b) -> a+b);
-    	;
+    	.reduceByKey((a, b) -> a+b);
+    	
     	// Step 5: Rank the doc.
 
         //set the output folder
@@ -148,7 +153,7 @@ public final class Ranking {
 		Set<String>queryWords = new HashSet<String>();
 		Scanner scanner = new Scanner(new File("AssignmentData/query.txt"));
 		while (scanner.hasNextLine()) {
-			queryWords.add(scanner.nextLine());
+			queryWords.addAll(scanner.nextLine().split(" "));
 		}
 		scanner.close();
 		return queryWords;
