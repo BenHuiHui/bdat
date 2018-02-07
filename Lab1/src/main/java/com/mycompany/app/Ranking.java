@@ -15,11 +15,8 @@ import java.util.Map;
 import java.util.Collection;
 import java.util.Scanner;
 import java.io.File;
+import java.io.Writer;
 
-
-/*
-/home/experimentben/lab1/bdat/Lab1/outfile/part-00000
-*/
 
 public final class Ranking {
 	private static String filePath = "AssignmentData/datafiles";
@@ -123,11 +120,11 @@ public final class Ranking {
  		.sortByKey(false);
 
  		List<Tuple2<Double, String>> top3 = sortedDocRanking.take(3);
-    	System.out.println("\n"+top3+"\n");
+    	writeOutput(top3);
 
         //set the output folder
-        countsOfWords.saveAsTextFile("countsOfWords");
-        normalizedTfIdf.saveAsTextFile("normalizedTfIdf");
+        //countsOfWords.saveAsTextFile("countsOfWords");
+        //normalizedTfIdf.saveAsTextFile("normalizedTfIdf");
         sortedDocRanking.saveAsTextFile("outfile");
         //stop spark
 	}
@@ -141,6 +138,17 @@ public final class Ranking {
 		return word;
 	}
 */
+
+	private void writeOutput(List<Tuple2<Double, String>> output) throws Exception {
+		Writer wr = new FileWriter("output.txt");
+		
+		for (Tuple2<Double, String>item : output) {
+			wr.write(item._2()+"\n");
+		}
+
+		wr.flush();
+		wr.close();
+	}
 
 	private Set<String> stopwordsAtFilePath(String filePath) throws Exception{
 		Set<String>stopwords = new HashSet<String>();
