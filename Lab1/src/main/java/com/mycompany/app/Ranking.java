@@ -154,7 +154,7 @@ public final class Ranking {
 		Scanner scanner = new Scanner(new File("AssignmentData/query.txt"));
 		while (scanner.hasNextLine()) {
 			for (String word :  scanner.nextLine().split(" ")) {
-				queryWords.addAll();
+				queryWords.add(word);
 			}
 		}
 		scanner.close();
