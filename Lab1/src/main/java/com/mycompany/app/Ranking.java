@@ -104,11 +104,12 @@ public final class Ranking {
     		String word = key.split("@")[1];
 
     		Double tfidf = keyAndCount._2();
+    		Double zero = 0;
 
     		if (queryWords.contains(word)) {
     			return new Tuple2<>(doc, tfidf);
     		} else {
-    			return new Tuple2<>(doc, 0.0);
+    			return new Tuple2<>(doc, zero);
     		}
     	})
     	.reduceByKey((a, b) -> a+b);
