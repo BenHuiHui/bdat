@@ -118,7 +118,9 @@ public final class Ranking {
     	.reduceByKey((a, b) -> a+b);
     	
     	// Step 5: Rank the doc.
-    	List<Tuple2<String, Double>> top3 = docRanking.take(3);
+    	List<Tuple2<String, Double>> top3 = docRanking
+    	.sortByKey(false)
+    	.take(3);
     	System.out.println("\n"+top3+"\n");
 
         //set the output folder
