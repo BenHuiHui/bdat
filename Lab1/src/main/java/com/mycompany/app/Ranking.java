@@ -113,9 +113,9 @@ public final class Ranking {
     		Double zero = Double.valueOf(0.0);
 
     		if (queryWords.contains(word)) {
-    			return new Tuple2<>(key, tfidf);
+    			return new Tuple2<>(word, tfidf);
     		} else {
-    			return new Tuple2<>(key, zero);
+    			return new Tuple2<>(word, zero);
     		}
     	})
     	.reduceByKey((a, b) -> a+b);
