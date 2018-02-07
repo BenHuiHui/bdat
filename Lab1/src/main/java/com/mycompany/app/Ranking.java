@@ -104,7 +104,7 @@ public final class Ranking {
     		String word = key.split("@")[1];
 
     		Double tfidf = keyAndCount._2();
-    		Double zero = 0;
+    		Double zero = Double.valueOf(0.0);
 
     		if (queryWords.contains(word)) {
     			return new Tuple2<>(doc, tfidf);
