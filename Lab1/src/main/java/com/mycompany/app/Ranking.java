@@ -120,7 +120,7 @@ public final class Ranking {
     	// Step 5: Rank the doc.
  		JavaPairRDD<Double, String> sortedDocRanking = docRanking
  		.mapToPair(keyAndCount -> new Tuple2<>(keyAndCount._2(), keyAndCount._1()))
- 		.sortByKey();
+ 		.sortByKey(false);
 
     	// System.out.println("\n"+docRanking.top(3)+"\n");
 
