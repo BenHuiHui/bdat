@@ -70,8 +70,18 @@ public final class Ranking {
     		return new Tuple2<>(key, tfidf);
     	});
 
+    	JavaPairRDD<String, Double> sumOfTfIdfO = tfIdfOfWords
+    	.map(keyAndCount -> {
+    		String key = keyAndCount._1();
+    		String doc = key.split("@")[0];
+    		Double tfidf = keyAndCount._2();
+
+    		return new Tuple2<>(doc, tfidf * tfidf);
+    	})
+    	.reduceByKey((a, b) -> a+b);
+
         //set the output folder
-        tfIdfOfWords.saveAsTextFile("outfile");
+        sumOfTfIdfO.saveAsTextFile("outfile");
         //stop spark
 	}
 
