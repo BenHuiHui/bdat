@@ -153,7 +153,9 @@ public final class Ranking {
 		Set<String>queryWords = new HashSet<String>();
 		Scanner scanner = new Scanner(new File("AssignmentData/query.txt"));
 		while (scanner.hasNextLine()) {
-			queryWords.addAll(scanner.nextLine().split(" "));
+			for (String word :  scanner.nextLine().split(" ")) {
+				queryWords.addAll();
+			}
 		}
 		scanner.close();
 		return queryWords;
