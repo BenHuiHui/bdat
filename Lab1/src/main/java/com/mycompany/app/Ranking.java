@@ -87,7 +87,7 @@ public final class Ranking {
     		String doc = key.split("@")[0];
 
     		Double tfidf = keyAndCount._2();
-    		return new Tuple2<>(key, tfidf / Math.sqrt(sumOfTfIdf.lookup(doc)[0]));
+    		return new Tuple2<>(key, tfidf / Math.sqrt(sumOfTfIdf.lookup(doc).get(0)));
     	});
 
         //set the output folder
@@ -112,6 +112,15 @@ public final class Ranking {
 		}
 		scanner.close();
 		return stopwords;
+	}
 
+	private List<String> filterWords() throws Exception{
+		Set<String>stopwords = new ArrayList<String>();
+		Scanner scanner = new Scanner(new File("AssignmentData/query.txt"));
+		while (scanner.hasNextLine()) {
+			stopwords.add(scanner.nextLine());
+		}
+		scanner.close();
+		return stopwords;
 	}
 }
