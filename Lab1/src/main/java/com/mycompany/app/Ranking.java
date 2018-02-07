@@ -20,7 +20,7 @@ public final class Ranking {
 	private static String filePath = "AssignmentData/datafiles";
 	private static String stopWordFilePath = "AssignmentData/stopwords.txt";
 	private static Character[] specialCharacters = {',', '.', '!', '[', ']'};
-	private int numberOfDoc = 10;
+	private double numberOfDoc = 10;
 
 	public static void main(String[] args) throws Exception {
 		Ranking ranking = new Ranking();
@@ -60,13 +60,18 @@ public final class Ranking {
     	.mapToPair(keyAndCount -> new Tuple2<>(keyAndCount._1().split("@")[1], 1))
     	.countByKey();
 
-    	//countsOfWords.reduceByKey
+    	JavaPairRDD<String, Double> tfIdfOfWords = countsOfWords
+    	.mapToPair(keyAndCount -> {
+    		String key = keyAndCount._1();
+    		String word = key.split("@")[1];
+    		Long count = keyAndCount._2();
 
-    	System.out.println(tfOfWords);
-
+    		Double tfidf = (1 + Math.log(count)) * Math.log(numberOfDoc / tfOfWords.get(word));
+    		return new Tuple2<>(key, tfidf);
+    	})
 
         //set the output folder
-        countsOfWords.saveAsTextFile("outfile");
+        tfIdfOfWords.saveAsTextFile("outfile");
         //stop spark
 	}
 
