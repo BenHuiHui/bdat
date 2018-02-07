@@ -122,7 +122,8 @@ public final class Ranking {
  		.mapToPair(keyAndCount -> new Tuple2<>(keyAndCount._2(), keyAndCount._1()))
  		.sortByKey(false);
 
-    	// System.out.println("\n"+docRanking.top(3)+"\n");
+ 		List<Tuple2<Double, String>> top3 = sortedDocRanking.take(3);
+    	System.out.println("\n"+top3+"\n");
 
         //set the output folder
         countsOfWords.saveAsTextFile("countsOfWords");
